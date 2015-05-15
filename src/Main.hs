@@ -30,10 +30,22 @@ apiUrl = "http://api.openweathermap.org/data/2.5/weather?q="
 requestBuilder :: City -> String
 requestBuilder city = apiUrl <> city <> "&units=metric"
 
-getWeather :: City -> IO (Maybe Value)
+getWeather :: City -> IO (Maybe Weather)
 getWeather city = do
     rawJson <- simpleHttp $ requestBuilder city
-    return (decode rawJson :: Maybe Value)
+    return (decode rawJson :: Maybe Weather)
+
+-- getEmoji :: Code -> Emoji
+-- getEmoji code = case code of
+--   "01d" = "sun"
+--   "02d" = "sun with cloud"
+--   "03d" = "cloud"
+--   "04d" = "bad cloud"
+--   "09d" = "bad rain"
+--   "10d" = "sun rain"
+--   "11d" = "thunder"
+--   "13d" = "snow"
+--   "50d" = "mist"
 
 parseArgs = do
     args <- getArgs
