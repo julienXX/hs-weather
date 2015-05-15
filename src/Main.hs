@@ -1,10 +1,11 @@
-{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE OverloadedStrings, DeriveGeneric #-}
 module Main where
 
 import System.Environment
 import Data.Monoid
 import Data.Aeson
 import Network.HTTP.Conduit
+import GHC.Generics
 
 type City = String
 
