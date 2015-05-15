@@ -12,17 +12,11 @@ type Code = String
 type Emoji = String
 
 data Weather =
-  Weather { weather :: !String
+  Weather { name :: !String
           , cod :: !Int } deriving (Show, Generic)
 
 instance FromJSON Weather
 instance ToJSON Weather
-
-data WeatherDetail =
-  WeatherDetail { icon :: !String } deriving (Show, Generic)
-
-instance FromJSON WeatherDetail
-instance ToJSON WeatherDetail
 
 apiUrl :: String
 apiUrl = "http://api.openweathermap.org/data/2.5/weather?q="
