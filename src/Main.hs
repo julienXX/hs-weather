@@ -21,9 +21,9 @@ getWeather city = do
 
 parseArgs = do
     args <- getArgs
-    return(case args of
-                [] -> error "No City given."
-                [s]-> s)
+    return $ case args of
+                  [] -> error "No City given."
+                  [s]-> s
 
 main = do
   city <- parseArgs
