@@ -19,8 +19,14 @@ getWeather city = do
     rawJson <- simpleHttp $ requestBuilder city
     return (decode rawJson :: Maybe Value)
 
+parseArgs = do
+    args <- getArgs
+    return(case args of
+                [] -> error "No City given."
+                [s]-> s)
+
 main = do
-  [city] <- getArgs
+  city <- parseArgs
   response <- getWeather city
   case response of
     (Just w) -> print . show $ w
