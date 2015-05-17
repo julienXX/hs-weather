@@ -20,7 +20,7 @@ Installation
 ===
 
 ```shell
-λ git clone https://github.com/julienXX/hs-weather.git
+λ git clone https://github.com/julienXX/weather.git
 λ cd hs-weather
 λ cabal sandbox init
 λ cabal install
