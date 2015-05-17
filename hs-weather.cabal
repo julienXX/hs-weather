@@ -21,6 +21,7 @@ executable hs-weather
   -- other-extensions:
   build-depends:       base >=4.8 && <4.9,
                        http-conduit,
-                       aeson
+                       aeson,
+                       text
   hs-source-dirs:      src
   default-language:    Haskell2010
