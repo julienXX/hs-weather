@@ -1,4 +1,4 @@
-{-# LANGUAGE OverloadedStrings, DeriveGeneric #-}
+{-# LANGUAGE OverloadedStrings #-}
 module Main where
 
 import System.Environment
@@ -6,7 +6,6 @@ import Data.Monoid
 import Control.Monad
 import Data.Aeson
 import Network.HTTP.Conduit
-import GHC.Generics
 import qualified Data.Text    as T
 import qualified Data.Text.IO as T
 
