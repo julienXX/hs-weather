@@ -13,12 +13,12 @@ type City = String
 type Code = String
 type Emoji = T.Text
 
-data Weather = Weather {description :: String, icon :: String}
+data Weather = Weather { icon :: String }
 
 instance FromJSON Weather where
     parseJSON (Object o) = do
         weatherValue <- head <$> o .: "weather"
-        Weather <$> weatherValue .: "description" <*> weatherValue .: "icon"
+        Weather <$> weatherValue .: "icon"
     parseJSON _ = mzero
 
 apiUrl :: String
