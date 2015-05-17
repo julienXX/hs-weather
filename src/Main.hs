@@ -14,7 +14,7 @@ type City = String
 type Code = String
 type Emoji = T.Text
 
-data Weather = Weather { icon :: String }
+data Weather = Weather { code :: String }
 
 instance FromJSON Weather where
     parseJSON (Object o) = do
@@ -56,5 +56,5 @@ main = do
   city <- parseArgs
   response <- getWeather city
   case response of
-    (Just w) -> T.putStrLn $ getEmoji $ icon $ w
+    (Just w) -> T.putStrLn $ getEmoji $ code $ w
     Nothing  -> error "Failed to fetch weather info."
