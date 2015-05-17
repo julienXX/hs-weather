@@ -17,10 +17,10 @@ type Emoji = T.Text
 data Weather = Weather { code :: String }
 
 instance FromJSON Weather where
-    parseJSON (Object o) = do
-        weatherValue <- head <$> o .: "weather"
-        Weather <$> weatherValue .: "icon"
-    parseJSON _ = mzero
+  parseJSON (Object o) = do
+    weatherValue <- head <$> o .: "weather"
+    Weather <$> weatherValue .: "icon"
+  parseJSON _ = mzero
 
 apiUrl :: URL
 apiUrl = "http://api.openweathermap.org/data/2.5/weather?q="
@@ -30,8 +30,8 @@ urlBuilder city = apiUrl <> city <> "&units=metric"
 
 getWeather :: City -> IO (Maybe Weather)
 getWeather city = do
-    rawJson <- simpleHttp $ urlBuilder city
-    return (decode rawJson :: Maybe Weather)
+  rawJson <- simpleHttp $ urlBuilder city
+  return (decode rawJson :: Maybe Weather)
 
 getEmoji :: Code -> Emoji
 getEmoji code = case take 2 code of
@@ -47,10 +47,10 @@ getEmoji code = case take 2 code of
   _ -> "⁉️"
 
 parseArgs = do
-    args <- getArgs
-    return $ case args of
-                  [] -> error "No City given."
-                  [s]-> s
+  args <- getArgs
+  return $ case args of
+            [] -> error "No City given."
+            [s]-> s
 
 main = do
   city <- parseArgs
