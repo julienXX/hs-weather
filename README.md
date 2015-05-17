@@ -24,7 +24,7 @@ Installation
 
 ```shell
 λ git clone https://github.com/julienXX/weather.git
-λ cd hs-weather
+λ cd weather
 λ cabal sandbox init
 λ cabal install
 λ cabal build
