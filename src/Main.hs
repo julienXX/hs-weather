@@ -39,8 +39,8 @@ getEmoji code = case code of
   "02d" -> "⛅️" -- sun with cloud
   "03d" -> "☁️" -- cloud
   "04d" -> "☁️" -- cloud
-  "09d" -> "☔️" -- rain
-  "10d" -> "☔️" -- rain
+  "09d" -> "💦" -- rain
+  "10d" -> "💦" -- rain
   "11d" -> "⚡️" -- thunder
   "13d" -> "❄️" -- snow
   "50d" -> "♒︎" -- mist
