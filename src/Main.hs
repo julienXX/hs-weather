@@ -56,4 +56,4 @@ main = do
   response <- getWeather city
   case response of
     (Just w) -> T.putStrLn $ getEmoji $ icon $ w
-    Nothing  -> print "Failed to fetch weather info."
+    Nothing  -> error "Failed to fetch weather info."
