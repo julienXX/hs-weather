@@ -3,6 +3,7 @@ module Main where
 
 import System.Environment
 import Data.Monoid
+import Control.Monad
 import Data.Aeson
 import Network.HTTP.Conduit
 import GHC.Generics
@@ -11,12 +12,13 @@ type City = String
 type Code = String
 type Emoji = String
 
-data Weather =
-  Weather { name :: !String
-          , cod :: !Int } deriving (Show, Generic)
+data Weather = Weather {description :: String, icon :: String}
 
-instance FromJSON Weather
-instance ToJSON Weather
+instance FromJSON Weather where
+    parseJSON (Object o) = do
+        weatherValue <- head <$> o .: "weather"
+        Weather <$> weatherValue .: "description" <*> weatherValue .: "icon"
+    parseJSON _ = mzero
 
 apiUrl :: String
 apiUrl = "http://api.openweathermap.org/data/2.5/weather?q="
