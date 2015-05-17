@@ -25,12 +25,12 @@ instance FromJSON Weather where
 apiUrl :: URL
 apiUrl = "http://api.openweathermap.org/data/2.5/weather?q="
 
-requestBuilder :: City -> URL
-requestBuilder city = apiUrl <> city <> "&units=metric"
+urlBuilder :: City -> URL
+urlBuilder city = apiUrl <> city <> "&units=metric"
 
 getWeather :: City -> IO (Maybe Weather)
 getWeather city = do
-    rawJson <- simpleHttp $ requestBuilder city
+    rawJson <- simpleHttp $ urlBuilder city
     return (decode rawJson :: Maybe Weather)
 
 getEmoji :: Code -> Emoji
