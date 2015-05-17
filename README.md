@@ -22,6 +22,8 @@ Usage
 Installation
 ===
 
+You'll need a working Haskell & Cabal setup (see [here](https://github.com/bitemyapp/learnhaskell/blob/master/install.md)).
+
 ```shell
 λ git clone https://github.com/julienXX/weather.git
 λ cd weather
