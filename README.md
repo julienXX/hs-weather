@@ -2,6 +2,9 @@ weather
 ---
 
 Get the current weather in a city from the command line.
+Perfect for some prompt swag!
+
+![prompt.png](https://s3.amazonaws.com/f.cl.ly/items/0j0A0o0c0c0F0g3B2I2b/Capture%20d%E2%80%99e%CC%81cran%202015-05-17%20a%CC%80%2016.24.11.png)
 
 Usage
 ===
