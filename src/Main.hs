@@ -6,8 +6,7 @@ import Prelude hiding (putStrLn)
 
 import System.Environment (getArgs)
 import Data.Monoid ((<>))
-import Control.Monad (mzero)
-import Data.Aeson (FromJSON(..), (.:), decode, Value(..))
+import Data.Aeson (FromJSON(..), (.:), decode, withObject)
 import Network.HTTP.Client (parseUrl, withManager, defaultManagerSettings, httpLbs, responseBody)
 import Data.ByteString.Lazy (ByteString)
 import Data.Text (Text)
@@ -21,10 +20,9 @@ type Emoji = Text
 data Weather = Weather { code :: String }
 
 instance FromJSON Weather where
-  parseJSON (Object o) = do
+  parseJSON = withObject "Weather" $ \o -> do
     weatherValue <- head <$> o .: "weather"
     Weather <$> weatherValue .: "icon"
-  parseJSON _ = mzero
 
 apiUrl :: URL
 apiUrl = "http://api.openweathermap.org/data/2.5/weather?q="
