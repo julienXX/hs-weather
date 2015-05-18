@@ -38,9 +38,7 @@ httpRequest str = do
      return (responseBody resp)
 
 getWeather :: City -> IO (Maybe Weather)
-getWeather city = do
-  rawJson <- httpRequest $ urlBuilder city
-  return (decode rawJson :: Maybe Weather)
+getWeather city =  decode <$> (httpRequest $ urlBuilder city)
 
 getEmoji :: Code -> Emoji
 getEmoji code = case take 2 code of
