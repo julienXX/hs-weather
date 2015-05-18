@@ -4,7 +4,6 @@ module WeatherSpec (spec) where
 
 import Weather
 import Test.Hspec
-import Test.QuickCheck
 
 spec :: Spec
 spec = do
