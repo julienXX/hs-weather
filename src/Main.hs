@@ -42,10 +42,10 @@ getWeather :: City -> IO (Maybe Weather)
 getWeather city =  decode <$> (httpRequest $ urlBuilder city)
 
 getEmoji :: Code -> Emoji
-getEmoji code =
-  if length code < 2
+getEmoji weather_code =
+  if length weather_code < 2
   then "⁉️"
-  else case take 2 code of
+  else case x of
         "01" -> "☀️" -- sun
         "02" -> "⛅️" -- sun with cloud
         "03" -> "☁️" -- cloud
@@ -56,6 +56,7 @@ getEmoji code =
         "13" -> "❄️" -- snow
         "50" -> "♒︎" -- mist
         _ -> "⁉️"
+       where x = take 2 weather_code
 
 parseArgs :: IO City
 parseArgs = readCity <$> getArgs
