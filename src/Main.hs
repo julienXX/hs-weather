@@ -1,19 +1,22 @@
 {-# LANGUAGE OverloadedStrings #-}
+
 module Main where
 
-import System.Environment
-import Data.Monoid
-import Control.Monad
-import Data.Aeson
-import Network.HTTP.Client
+import Prelude hiding (putStrLn)
+
+import System.Environment (getArgs)
+import Data.Monoid ((<>))
+import Control.Monad (mzero)
+import Data.Aeson (FromJSON(..), (.:), decode, Value(..))
+import Network.HTTP.Client (parseUrl, withManager, defaultManagerSettings, httpLbs, responseBody)
 import Data.ByteString.Lazy (ByteString)
-import qualified Data.Text    as T
-import qualified Data.Text.IO as T
+import Data.Text (Text)
+import Data.Text.IO (putStrLn)
 
 type URL = String
 type City = String
 type Code = String
-type Emoji = T.Text
+type Emoji = Text
 
 data Weather = Weather { code :: String }
 
@@ -64,5 +67,5 @@ main = do
   city <- parseArgs
   response <- getWeather city
   case response of
-    (Just w) -> T.putStrLn $ getEmoji $ code $ w
+    (Just w) -> putStrLn $ getEmoji $ code $ w
     Nothing  -> error "Failed to fetch weather info."
