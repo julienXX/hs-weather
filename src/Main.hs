@@ -41,27 +41,32 @@ getWeather :: City -> IO (Maybe Weather)
 getWeather city =  decode <$> (httpRequest $ urlBuilder city)
 
 getEmoji :: Code -> Emoji
-getEmoji code = case take 2 code of
-  "01" -> "☀️" -- sun
-  "02" -> "⛅️" -- sun with cloud
-  "03" -> "☁️" -- cloud
-  "04" -> "☁️" -- cloud
-  "09" -> "💦" -- rain
-  "10" -> "💦" -- rain
-  "11" -> "⚡️" -- thunder
-  "13" -> "❄️" -- snow
-  "50" -> "♒︎" -- mist
-  _ -> "⁉️"
+getEmoji code =
+  if length code < 2
+  then "⁉️"
+  else case take 2 code of
+        "01" -> "☀️" -- sun
+        "02" -> "⛅️" -- sun with cloud
+        "03" -> "☁️" -- cloud
+        "04" -> "☁️" -- cloud
+        "09" -> "💦" -- rain
+        "10" -> "💦" -- rain
+        "11" -> "⚡️" -- thunder
+        "13" -> "❄️" -- snow
+        "50" -> "♒︎" -- mist
+        _ -> "⁉️"
 
+parseArgs :: IO String
 parseArgs = do
   args <- getArgs
   return $ case args of
             [] -> error "No City given."
             [s]-> s
 
+main :: IO ()
 main = do
-  city <- parseArgs
-  response <- getWeather city
-  case response of
-    (Just w) -> putStrLn $ getEmoji $ code $ w
-    Nothing  -> error "Failed to fetch weather info."
+   city <- parseArgs
+   response <- getWeather city
+   case response of
+     (Just w) -> putStrLn $ getEmoji $ code $ w
+     Nothing  -> error "Failed to fetch weather info."
