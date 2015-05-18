@@ -5,6 +5,7 @@ module Main where
 import Prelude hiding (putStrLn)
 
 import System.Environment (getArgs)
+import Data.Maybe (listToMaybe)
 import Data.Monoid ((<>))
 import Data.Aeson (FromJSON(..), (.:), decode, withObject)
 import Network.HTTP.Client (parseUrl, withManager, defaultManagerSettings, httpLbs, responseBody)
@@ -56,12 +57,11 @@ getEmoji code =
         "50" -> "♒︎" -- mist
         _ -> "⁉️"
 
-parseArgs :: IO String
-parseArgs = do
-  args <- getArgs
-  return $ case args of
-            [] -> error "No City given."
-            [s]-> s
+parseArgs :: IO City
+parseArgs = readCity <$> getArgs
+  where readCity args = case listToMaybe args of
+                         Nothing -> error "No City given."
+                         Just s -> s
 
 main :: IO ()
 main = do
