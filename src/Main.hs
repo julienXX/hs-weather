@@ -5,7 +5,8 @@ import System.Environment
 import Data.Monoid
 import Control.Monad
 import Data.Aeson
-import Network.HTTP.Conduit
+import Network.HTTP.Client
+import Data.ByteString.Lazy (ByteString)
 import qualified Data.Text    as T
 import qualified Data.Text.IO as T
 
@@ -28,9 +29,16 @@ apiUrl = "http://api.openweathermap.org/data/2.5/weather?q="
 urlBuilder :: City -> URL
 urlBuilder city = apiUrl <> city <> "&units=metric"
 
+httpRequest :: URL -> IO ByteString
+httpRequest str = do
+  req <- parseUrl str
+  withManager defaultManagerSettings $ \mgr -> do
+     resp <- httpLbs req mgr
+     return (responseBody resp)
+
 getWeather :: City -> IO (Maybe Weather)
 getWeather city = do
-  rawJson <- simpleHttp $ urlBuilder city
+  rawJson <- httpRequest $ urlBuilder city
   return (decode rawJson :: Maybe Weather)
 
 getEmoji :: Code -> Emoji
