@@ -2,7 +2,7 @@
 -- documentation, see http://haskell.org/cabal/users-guide/
 
 name:                weather
-version:             0.1.0.0
+version:             0.1.0
 -- synopsis:
 -- description:
 license:             MIT
@@ -10,15 +10,12 @@ license-file:        LICENSE
 author:              Julien Blanchard
 maintainer:          julien@sideburns.eu
 -- copyright:
-category:            Web
+category:            Tools
 build-type:          Simple
--- extra-source-files:
 cabal-version:       >=1.10
 
 executable weather
-  main-is:             Main.hs
-  -- other-modules:
-  -- other-extensions:
+  main-is:             Weather.hs
   build-depends:       base >=4.8 && <4.9,
                        http-client,
                        aeson,
