@@ -23,4 +23,17 @@ executable weather
                        bytestring
   hs-source-dirs:      src
   default-language:    Haskell2010
-  ghc-options:         -Wall
+  ghc-options:         -Wall -threaded -O2 -main-is Weather.main
+
+test-suite spec
+  type:                exitcode-stdio-1.0
+  hs-source-dirs:      src, test
+  main-is:             Spec.hs
+  build-depends:       base  == 4.*
+                     , http-client
+                     , aeson
+                     , text
+                     , bytestring
+                     , hspec >= 1.3
+                     , QuickCheck
+  default-language:    Haskell2010
