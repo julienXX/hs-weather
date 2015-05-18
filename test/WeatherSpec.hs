@@ -24,3 +24,7 @@ spec = do
             getEmoji "11" `shouldBe` "\9889\65039"
             getEmoji "13" `shouldBe` "\10052\65039"
             getEmoji "50" `shouldBe` "\9810\65038"
+
+    describe "urlBuilder" $ do
+      it "return an URL" $ do
+          urlBuilder "london" `shouldBe` "http://api.openweathermap.org/data/2.5/weather?q=london&units=metric"
